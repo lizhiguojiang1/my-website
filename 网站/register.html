@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <link rel="stylesheet" href="bootstrap.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能助老反诈原型系统 - 注册</title>
+    <style>
+        /* 样式代码，可根据需求进行调整 */
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Microsoft YaHei', sans-serif; /* 使用更现代的字体 */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url('background.jpg'); /* 确保背景图片路径正确 */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #333; /* 设置文本颜色 */
+        }
+
+        .content {
+            transform: translateY(-40px);
+            text-align: center;
+            margin-bottom: 10px; /* 增加与登录框的间距 */
+            font-size: 24px; /* 增大字体 */
+            font-weight: bold; /* 加粗字体 */
+            color: #fff; /* 如果背景图片较暗，可以使用白色文本 */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 添加文本阴影，增强可读性 */
+            background-color: rgba(0, 0, 0, 0.5); /* 使用半透明背景色覆盖背景图片，以便文本更易读 */
+            padding: 10px 20px; /* 增加内边距 */
+            border-radius: 10px; /* 添加圆角 */
+        }
+
+        .login-container {
+            transform: translateY(-40px);
+            background-color: rgba(255, 255, 255, 0.8); /* 使用半透明背景色，以便与背景图片融合 */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* 增强阴影效果 */
+            width: 600px; /* 限制登录框宽度 */
+            box-sizing: border-box; /* 确保内边距和边框不会影响宽度 */
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px; /* 增加标题与输入框的间距 */
+            font-size: 20px; /* 增大标题字体 */
+            color: #333; /* 设置标题颜色 */
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* 确保内边距和边框不会影响宽度 */
+            font-size: 16px; /* 增大输入框字体 */
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px; /* 增大按钮字体 */
+            transition: background-color 0.3s ease; /* 添加过渡效果 */
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px; /* 设置错误信息的字体大小 */
+        }
+
+        .alert.show {
+            opacity: 1;
+        }
+
+        .alert {
+            transition: 0.5s;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>欢迎来到智能助老反诈平台！</h1>
+    </div>
+
+    <div class="login-container">
+        <h2>欢迎-注册</h2>
+        <div class="alert alert-success" role="alert"></div>
+        <input type="text" id="username" placeholder="用户名">
+        <input type="password" id="password" placeholder="密码">
+        <input type="password" id="confirm-password" placeholder="确认密码">
+        <button type='button' class='btn'>注册</button>
+        <a href="./login.html">已有账号？登录</a>
+        <div id="error-message" class="error-message"></div>
+    </div>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script src="bootstrap.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const myAlert = document.querySelector('.alert');
+
+        function alertFn(msg, isSuccess) {
+            myAlert.classList.add('show');
+
+            //2.细节
+            myAlert.innerHTML = msg;
+            const bgStyle = isSuccess ? 'alert-success' : 'alert-danger';
+            myAlert.classList.add(bgStyle);
+            //3.隐藏
+            setTimeout(() => {
+                myAlert.classList.remove('show');
+                myAlert.classList.remove(bgStyle);
+            }, 2000);
+        }
+
+        document.querySelector('.btn').addEventListener('click', function () {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // 判断长度
+            if (username.length < 8) {
+                alertFn('用户名长度不能小于8位', false);
+                console.log('用户名必须大于8位');
+                return;
+            }
+
+            // 判断密码是否一致
+            if (password !== confirmPassword) {
+                alertFn('两次输入的密码不一致', false);
+                console.log('两次输入的密码不一致');
+                return;
+            }
+
+            axios({
+                url: 'https://hmajax.itheima.net/api/register', // 假设注册API的URL
+                method: 'post',
+                data: {
+                    username,
+                    password
+                }
+            }).then(result => {
+                alertFn(result.data.message, true);
+                console.log(result.data.message);
+                // 跳转到登录页面
+                setInterval(() => {
+                    window.location.href = './login.html';
+                }, 2000);
+            })
+            .catch(err => {
+                alertFn(err.response.data.message, false);
+                console.log(err.response.data.message);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防范诈骗人人有责，提高警惕保护自己！</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="" alt="">
+            </a>
+            <ul class="nav-links">
+                <li><a href="./login.html" target="_blank">登陆</a></li>
+                <li><a href="./register.html" target="_blank">注册</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- 头部区域 -->
+    <header class="header">
+        <div class="container">
+            <h1>反诈</h1>
+            <p>防范诈骗人人有责，提高警惕保护自己！</p>
+        </div>
+    </header>
+    <!-- 主要内容区 -->
+    <main class="main-content">
+        <div class="container">
+            <div class="background-image clearfix"></div>
+            <section class="content-section">
+                <div class="image-float leftfix">
+                    <ul id="carousel">
+                        <li style="background-image: url('./images/image1.jpg');" class="active"></li>
+                        <li style="background-image: url('./images/image2.png');"></li>
+                        <li style="background-image: url('./images/image3.png');"></li>
+                        <li style="background-image: url('./images/image4.png');"></li>
+                    </ul>
+                    <div class="carousel-indicators">
+                        <span class="indicator active" data-index="0">1</span>
+                        <span class="indicator" data-index="1">2</span>
+                        <span class="indicator" data-index="2">3</span>
+                        <span class="indicator" data-index="3">4</span>
+                    </div>
+                </div>
+                <section class="news-list rightfix">
+                    <div class="box">
+                        <article class="news-item">
+                            <a href="./item/item1.html" target="_blank">75岁老人轻信假客服,198万养老钱差点打水漂!</a>
+                            <time datetime="2025-02-21">2025-02-21</time>
+                        </article>
+                        <article class="news-item">
+                            <a href="./item/item2.html" target="_blank">学生群体集体受骗!</a>
+                            <time datetime="2025-02-21">2025-02-21</time>
+                        </article>
+                        <article class="news-item">
+                            <a href="./item/item3.html" target="_blank">养生讲座推销高价“神药”!</a>
+                            <time datetime="2025-02-21">2025-02-21</time>
+                        </article>
+                        <article class="news-item">
+                            <a href="./item/item4.html" target="_blank">上海爷叔被搭讪后，5000 元没了</a>
+                            <time datetime="2025-02-21">2025-02-21</time>
+                        </article>
+                        <article class="news-item">
+                            <a href="./item/item5.html" target="_blank">75岁老人轻信假客服,198万养老钱差点打水漂!</a>
+                            <time datetime="2025-02-21">2025-02-21</time>
+                        </article>
+                        <article class="news-item">
+                            <a href="./item/item6.html" target="_blank">八旬老人险失3万元养老钱!</a>
+                            <time datetime="2025-02-21">2025-02-21</time>
+                        </article>
+                        <!-- 其他新闻项... -->
+                    </div>
+                </section>
+            </section>
+        </div>
+    
+    </main>
+    <!-- 次要内容 -->
+    <main class="content">
+        <div>
+            
+          <button class="btn-test"><a href="./templates/index.html" target="_blank">测试</a></button>
+        </div>
+    </footer>
+    <script>
+        var carousel = document.querySelector('#carousel');
+        var items = carousel.children;
+        var indicators = document.querySelectorAll('.carousel-indicators .indicator');
+        var index = 0;
+        
+        function showSlide(index) {
+     for (let i = 0; i < items.length; i++) {
+                items[i].classList.remove('active');
+                indicators[i].classList.remove('active');
+            }
+            items[index].classList.add('active');
+            indicators[index].classList.add('active');
+        }
+        
+        function showNext() {
+            index++;
+            if (index >= items.length) {
+                index = 0;
+            }
+            showSlide(index);
+        }
+        
+        function showPrev() {
+            index--;
+            if (index < 0) {
+            index = items.length - 1;
+            }
+            showSlide(index);
+        }
+        
+        setInterval(showNext, 4000);
+        
+        indicators.forEach((indicator, idx) => {
+            indicator.addEventListener('click', () => {
+                showSlide(idx);
+            });
+        });
+            </script>
+        <script
+        async
+        defer
+        src="http://127.0.0.1:8080/api/application/embed?protocol=http&host=127.0.0.1:8080&token=9c3c96d93e7a9600">
+        </script>
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+        
+</body>
+</html>

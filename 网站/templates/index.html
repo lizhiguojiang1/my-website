@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Python Code</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: skyblue;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Button Styles */
+        #runButton {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        #runButton:hover {
+            background-color: #0056b3;
+        }
+
+        /* Result Paragraph Styles */
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+            overflow: auto; /* Enable scroll if needed */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            font-size: 1.5em;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+
+        /* Status Colors */
+        .success {
+            color: green;
+        }
+
+        .warning {
+            color: orange;
+        }
+
+        .error {
+            color: red;
+        }
+
+        /* Transition Effects */
+        .modal-content {
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Run Python Code from Button</h1>
+        <button id="runButton" class="el-icon-star-off">Run Python Code</button>
+        <p id="result"></p>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalMessage"></p>
+        </div>
+    </div>
+
+    <script>
+        // Get modal and close button
+        var modal = document.getElementById("myModal");
+        var span = document.getElementsByClassName("close")[0];
+
+        document.getElementById("runButton").addEventListener("click", function() {
+            console.log("Button clicked");
+
+            // Send POST request to the backend
+            fetch('http://127.0.0.1:5000/run-python', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'  // Set request header
+                }
+            })
+            .then(response => {
+                console.log("Response status:", response.status);
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();  // Parse JSON response
+            })
+            .then(data => {
+                console.log("Data received:", data);
+                document.getElementById("result").textContent = data.message;  // Display result
+
+                // Apply color and show modal based on the status
+                const modalMessage = document.getElementById("modalMessage");
+                modalMessage.textContent = data.message; // Set the message in the modal
+                
+                // Change modal message color based on status
+                if (data.status === "warning") {
+                    modalMessage.className = "warning";  // Apply orange color for warnings
+                } else if (data.status === "error") {
+                    modalMessage.className = "error";  // Apply red color for errors
+                } else if (data.status === "success") {
+                    modalMessage.className = "success";  // Apply green color for success
+                }
+
+                // Show the modal
+                modal.style.display = "block";
+            })
+            .catch(error => {
+                console.error('Error:', error);  // Capture and log error
+                document.getElementById("result").textContent = "An error occurred. Check the console for details.";
+            });
+        });
+
+        // Close the modal when the user clicks the "x"
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Close the modal if the user clicks outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

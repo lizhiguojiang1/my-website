@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📢 警惕！冒充客服诈骗新套路</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #89cff0 0%, #6495ed 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        h1 {
+            color: #e74c3c;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .news-content {
+            line-height: 1.8;
+            color: #2c3e50;
+            margin-bottom: 3rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(45deg, #ffebee, #ffcdd2);
+            border-left: 8px solid #e53935;
+            padding: 2rem;
+            margin: 3rem 0;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning-box::before {
+            content: "⚠️";
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-size: 3rem;
+            color: #e53935;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .prevention-list {
+            list-style: none;
+            padding-left: 3rem;
+            counter-reset: item;
+        }
+
+        .prevention-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 1.5rem;
+        }
+
+        .prevention-list li::before {
+            content: "🛡️";
+            position: absolute;
+            left: 0;
+            color: #2980b9;
+            font-size: 1.2rem;
+        }
+
+        .contact {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact:hover {
+            transform: translateY(-3px);
+        }
+
+        .contact a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .contact a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: white;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .contact a:hover::after {
+            transform: scaleX(1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .warning-box::before {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📢 警惕！冒充客服诈骗新套路</h1>
+            <p style="color: #7f8c8d; font-size: 1.2rem;">75岁老人轻信假客服，198万养老钱差点打水漂！</p>
+        </div>
+
+        <div class="news-content">
+            <h2 style="color: #34495e; border-left: 4px solid #e74c3c; padding-left: 15px;">事件经过：</h2>
+            <p>近日，75岁的徐某接到自称"某短视频平台客服"的电话，对方称其已加入平台购物团，每月将自动扣费800元。徐某要求取消业务后，被转接到"高级客服"。在对方指导下：</p>
+            <ul style="list-style: disc; padding-left: 40px;">
+                <li>下载"天e云"会议软件</li>
+                <li>开启屏幕共享功能</li>
+                <li>多次进行密码操作和人脸识别</li>
+            </ul>
+            <p>最终卡内198万元被全部转出，返款却迟迟未到账，徐某这才意识到被骗。</p>
+
+            <div class="warning-box">
+                <h3 style="color: #e53935; margin-bottom: 1rem;">🔔 警方紧急提醒：</h3>
+                <p style="font-weight: 500;">任何要求开启屏幕共享、进行人脸识别或提供密码的操作都是诈骗！</p>
+            </div>
+
+            <h2 style="color: #34495e; border-left: 4px solid #2980b9; padding-left: 15px;">🛡️ 防范措施：</h2>
+            <ol class="prevention-list" style="counter-reset: item; list-style: none; padding-left: 3rem;">
+                <li><span style="color: #2980b9;">1.</span> 不轻信陌生来电，尤其是"客服"主动来电</li>
+                <li><span style="color: #2980b9;">2.</span> 拒绝屏幕共享要求，不透露个人信息</li>
+                <li><span style="color: #2980b9;">3.</span> 通过官方渠道核实信息真实性</li>
+                <li><span style="color: #2980b9;">4.</span> 立即安装国家反诈中心APP</li>
+            </ol>
+        </div>
+
+        <div class="contact">
+            <p style="font-size: 1.2rem;">如遇诈骗请立即拨打：<a href="tel:110">110</a> 或访问 <a href="https://www.12381.gov.cn/" target="_blank">国家反诈中心官网</a></p>
+        </div>
+    </div>
+</body>
+</html>
